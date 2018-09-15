@@ -1,0 +1,235 @@
+%
+% This is the LaTeX template file for lecture notes for EE 382C/EE 361C.
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi.
+%
+% This template is based on the template for Prof. Sinclair's CS 270.
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\usepackage{parskip}
+\usepackage{amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{listings}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\lstset{language=Python, numbers=left, tabsize=2, xleftmargin=5.0ex,breaklines=true,}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382V: Social Computing
+                        \hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{6}{August 25}{Vijay Garg}{Ari Bruck}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Demange, Gale, and Sotomayor aka \texttt{DGS/Auction} Algorithm}
+After the discussion of the Kuhn–Munkres algorithm, the professor introduced a new algorithm. 
+%This algorithm works by letting bidders take turns bidding the next highest price on an item until they own it or have been outbid.
+The algorithm will provide the best possible assignment of goods and bidders such that the prices are maximized.
+
+%\texttt{DGS} = Demange, Gale, and Sotomayor aka \texttt{Auction} Algorithm
+\begin{align*}
+\textbf{Input}:  &\texttt{Bipartite graph with non-negative integer weights on the edges},\\
+                 &\texttt{B}: \text{set of Bidders,}\\
+                 &\texttt{G}: \text{set of Goods,}\\
+                 &\texttt{W$_{\textit{i,j}}$}: \text{weight between bidder \textit{i} and good \textit{j}}\\
+\textbf{Output}: &\texttt{Maximum weight matching}\\\\
+%\textbf{Variable Declaration}:\\
+              Q: &\text{Queue of Bidders}\\
+            P_j: &\text{Price of Good j}\\
+        Owner_j: &\text{Current winning bidder of Good $j$}\\
+            n_m: &\text{Size of the matching (In the example in class $n_g \leq n_b$ [more bidders than goods] so $n_m = n_g)$}\\
+         \delta: &\text{The incremental price increase in auction price as a result of a matching}\\
+\end{align*}
+
+\begin{algorithm}
+\caption{DGS/Auction}\label{euclid}
+\begin{algorithmic}[1]
+%\Procedure{MyProcedure}{}
+\ForAll{goods $j$}
+    \State $P_j \gets 0$ \Comment{Each good's price starts at 0}
+    \State $Owner_j \gets  \texttt{NULL}$ \Comment{bidders do not own any good}
+\EndFor
+\State $Q \gets B$ \Comment{all bidders are in the queue}
+\State $n_m \gets \min{(n_g, n_b)} $
+\State $\delta \gets \frac{1}{n_m+1}$
+\\
+\While {$Q \neq \emptyset$}
+    \State $i \gets Q.dequeue()$
+    \State find $j$ that maximizes $W_{i,j} - P_j$ \Comment{Find the good that has best ``effective'' payoff}
+    \If{$W_{i,j} - P_j \geq 0$} \Comment{If the good adds to the overall weight matching}
+        \State $Q.enqueue(Owner_j)$ \Comment{Replace current owner}
+        \State $Owner_j \gets i$ \Comment{with new one}
+        \State $P_j \gets P_j + \delta$ \Comment {Increase the auction price for that good}
+    \EndIf
+\EndWhile
+\\
+\Return $ (j, Owner_j) \forall{j} $. \Comment{maximum weight matching has been found, return all goods and their owners}
+%\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\underline{\textbf{Correctness:}} The proof of correctness is based on showing that the algorithm gets into an “equilibrium”, a situation where all bidders ``are happy''.
+
+\underline{\textbf{Definition:}} Bidder $i$ is $\delta$-happy with respect to $P$ if $\exists$ good $j$ s.t. \textbf{either}:
+\begin{align*}
+    Owner_j = &i\\
+    \text{\textbf{AND}}\\
+    \forall \text{ goods } j': &\delta + W_{i,j}-P_j \geq W_{i,j'}-P_{j'}\\\\
+    \text{\textbf{OR}}\\\\
+    Owner_j \neq &i\\
+    \text{\textbf{AND}}\\
+    \forall \text{ goods } j: &W_{i,j} \leq P_j
+\end{align*}
+
+\underline{\textbf{Loop Invariant:}} $\forall$ bidders $\not\subset Q$ are $\delta$-happy
+
+\underline{\textbf{Initially:}} \texttt{\textbf{TRUE}}\\
+$Q$ is initialized to all bidders
+
+\underline{\textbf{At Runtime:}} \texttt{\textbf{TRUE}}\\
+For the bidder $i$ dequeued in an iteration, the loop exactly chooses the $j$ that makes him happy, if such $j$ exists, and the $\delta$-error is due to the final increase in $P_j$.\\
+Therefore this iteration cannot hurt the invariant for any other $i'$: any increase in $P_j$ for $j$ that is not owned by $i'$ does not hurt the inequality while an increase for the $j$ that was owned by $i'$ immediately enqueues $i'$.\\
+
+The running time analysis above implies that the algorithm terminates, at which point Q must be empty and thus all bidders must be $\delta$-happy. \begin{flushright}$\blacksquare$\end{flushright}
+
+\subsection{$\delta$-Happy Bidders}
+
+\underline{\textbf{Claim:}} If all bidders are $\delta$-happy then for every matching $M'$
+\[
+n\delta + \sum_{i=owner_j} W_{i,j} \ge \sum_{(i,j) \in M'} W_{i,j}
+\]
+
+\underline{\textbf{Proof:}} Fix a bidder $i$ and assume $i$ receives item $j$ by this algorithm such that:
+\[
+\delta + W_{i,j} - P_j \geq W_{i,j'} - P_{j'} \text{ where $j'$ is item received in $M'$}
+\]
+\begin{align*}
+\text{Sum over all }i &= \sum_{i=owner_j} (\delta + W_{i,j} - P_j) \geq \sum_{i,j'} (W_{i,j'} - P_{j'})\\
+                      &= n\delta + \sum_{i=owner_j} (W_{i,j} - P_j) \geq \sum_{i,j'} (W_{i,j'} - P_{j'})
+\end{align*}
+Since both the algorithm and $M'$ give matchings, each $j$ appears at most once on the left hand side and at most once on the right hand side.\\
+Moreover, if some $j$ does not appear on the left hand side then it was never picked by the algorithm and thus $P_j=0$. Thus when we subtract $\sum_j P_j$ from both sides of the inequality, the LHS becomes the LHS of the inequality in the lemma and the RHS becomes at most the RHS of the inequality in the lemma such that
+\[
+= n\delta + \sum_{i=owner_j} W_{i,j} \geq \sum_{i,j'} W_{i,j'}
+\]
+\begin{flushright}$\blacksquare$\end{flushright}
+\textit{\underline{Some things to note:}} 
+In the algorithm, either some bidder gets out of $Q$ or the price of good $j$ goes up by $\delta$.
+Since all weights (prices) $\in \mathbb{Z}$ (rational prices can be scaled to integers), then
+$n\delta < 1$.
+
+No $P_j$ can ever increase once its value is above $C = max_{i,j} W_{i,j}$. 
+It follows that the total number of iterations of the main loop is at most $Cn/\delta = O(Cn^2)$ where $n$ is the total number of vertices (goods+bidders).\\
+Each loop can be trivially implemented in $O(n)$ time, giving total running time of $O(Cn^3)$, which for the unweighted case, $C=1$, matches the running time of the basic alternating paths algorithm on dense graphs.
+ 
+ 
+\section*{References}
+\beginrefs
+\bibentry {} {\sc Noam Nisan},
+Auction Algorithm for Bipartite Matching,
+{\it Turing's Invisible Hand: Computation, Economics, and Game Theory} (July 2009),\\ https://agtb.wordpress.com/2009/07/13/auction-algorithm-for-bipartite-matching/
+
+\endrefs
+
+
+\end{document}
+
+
+
+
+
