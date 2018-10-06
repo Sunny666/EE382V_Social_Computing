@@ -1,0 +1,228 @@
+%
+% This is the LaTeX template file for lecture notes for EE 382C/EE 361C.
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi.
+%
+% This template is based on the template for Prof. Sinclair's CS 270.
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\usepackage[]{algorithm2e}
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382V: Social Computing
+                        \hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{3 Session 2 }{September 28}{Vijay Garg}{Carmina Francia}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Stable Matching/Marriage}
+Matching has a lot of real world applications. We see it in markets, buyers/sellers, computer processes, residencies, and so on. So far we've used matching in the context of girls likes boys and boys like girls. These matchings can sometimes have \textit{preferences}.  
+
+This is called \textbf{Stable matching/marriage}. It is finding a matching between two equal sets each following an ordered preference list. 
+
+For example, let's  create two preference lists: 
+\begin{table}[!htb]
+    \begin{minipage}{.5\linewidth}
+      \caption{Men Preference List}
+      \centering
+        \begin{tabular}{c | c c c c}
+          \hline
+          \hline
+            M1 & W4 & W1 & W2 & W3 \\ 
+ 			M2 & W2 & W3 & W1 & W4 \\  
+ 			M3 & W2 & W4 & W3 & W1 \\ 
+  			M4 & W3 & W1 & W4 & W2 \\ 
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \caption{Women Preference List}
+        \begin{tabular}{c | c c c c}
+          \hline
+          \hline
+            W1 & M4 & M1 & M3 & M2 \\ 
+            W2 & M1 & M3 & M2 & M4 \\ 
+            W3 & M1 & M2 & M3 & M4 \\ 
+            W4 & M4 & M1 & M3 & M2 \\ 
+        \end{tabular}
+    \end{minipage} 
+\end{table}
+
+This is still a bipartite and a good matching would be when we don't  have one woman assigned to two men and vice versa.
+
+\subsection*{Blocking Pair}
+What kind of marriage would not last long? 
+Let's say we have the following matchings: \textit{(m,w) }and \textit{(m', w')}. 
+If \textit{m} and \textit{w'} are not engaged, but m prefers \textit{w'} to w and \textit{w'} prefers \textit{m} to \textit{m'} , then there's an incentive for them to break. This is called a \textbf{blocking pair}. 
+
+\textbf{The goal of stable matching is to find a matching that has \textit{no} blocking pair. }
+
+\section{Gale and Shapley Algorithm}
+The idea is similar to DGS algorithm: people bidding and going for the most valuable item. We will have men proposing (bidders). The difference is the other set, in this case women, has a say. Women can reject men. \newline
+\begin{algorithm}[H]
+ \KwData{men preference list and women preference list}
+ \KwResult{(m,w) matchings}
+Assuming number of men is equal to number of women\;
+ Put all men in a list (initially everyone if free)\;
+ \While{free list of men is not empty}{
+  pick any free man\;
+  man proposes to most preferred woman that he has not proposed to\;
+  \eIf{woman is free}{
+   men is engaged with that woman\; 
+   }{
+   woman rejects the less desirable man of the two men based on her preference list\;
+  }
+  rejected man go back to free list (does not matter where in the list)
+ }
+\end{algorithm}
+
+\textbf{Key notes:}
+\begin{itemize}
+\item \textit{engaged} means man and woman are not married. Matchings can change as algorithm progresses.
+\item Women rejects based on their preference list
+\item if you're a \textit{free} woman, you cannot say no. Only way to reject is if a better man comes.
+\item Once a woman is engaged, she cannot be free.
+\item Algorithm \textbf{ALWAYS} terminates and everybody is married.
+\end{itemize}
+This example is \textit{man-optimal}. It is seen as worse from women's perspective. However, as the algorithm progresses, men decrease on their preference while women are safe or their preference increases. 
+
+\section{Stable Matching Example}
+
+Let's walk through a man-optimal example...
+\begin{table}[!htb]
+    \begin{minipage}{.5\linewidth}
+    \caption{Men Preference List}
+      \centering
+        \begin{tabular}{c | c c c c}
+          \hline
+          \hline
+            \textbf{M1} & \textbf{W4} & W1 & W2 & W3 \\ 
+ 			\textbf{M2 }& \textit{W2}& \textbf{W3} & W1 & W4 \\  
+ 			\textbf{M3} &\textbf{ W2} & W4 & W3 & W1 \\ 
+  			\textbf{M4} &\textit{ W3 }& \textbf{W1} & W4 & W2 \\ 
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+      \caption{Women Preference List}
+        \begin{tabular}{c | c c c c}
+          \hline
+          \hline
+            \textbf{W1} & \textbf{M4} & M1 & M3 & M2 \\ 
+            \textbf{W2} & \textit{M1} & \textbf{M3} & M2 & M4 \\ 
+            \textbf{W3} & \textit{M1} & \textbf{M2} & M3 & M4 \\ 
+            \textbf{W4} & \textit{M4} & \textbf{M1} & M3 & M2 \\ 
+        \end{tabular}
+    \end{minipage} 
+\end{table} 
+
+\begin{enumerate}
+\item Let's begin with \textit{M1}. \textit{W4} is free so \textit{M1} and \textit{W4} becomes engaged. 
+\item We move on to \textit{M2}. \textit{W2} is free and becomes engaged with \textit{M2}.
+\item We go to \textit{M3}. \textit{W2} is already engaged, so we check the woman's preference list. \textit{W2} prefers \textit{M3} over \textit{M2}. So now, \textit{M3} and \textit{W2} are engaged. \textit{M2} goes back to the free list.
+\item We go to \textit{M4}. \textit{W3} is free and becomes engaged with \textit{M4}.
+\item We pick \textit{M3}. The next woman on his preference list that he has not proposed to is \textit{W3}. \textit{W3} is engaged to \textit{M4}. We check the \textit{W3}'s preference list. \textit{W3} prefers \textit{M3} over \textit{M4}. So \textit{M3} and \textit{W3} becomes engaged and \textit{M4} goes back to the list.
+\item We pick \textit{M4}. \textit{W1} is free so \textit{M4} and \textit{W1} becomes engaged.
+\end{enumerate}
+The list is now empty and returns the matchings: \textit{(M1, W4)}, \textit{(M2, W3)}, \textit{(M3, W2)}, \textit{(M4, W1)}. Since we don't see any blocking pairs, this is a stable matching.
+
+Now let's say it's a woman-optimal. Same steps apply except we would initialize with all women in the free list and pick a woman to start with. Once the list is empty and everybody is married/matched, you will notice that we come up with the same matchings:\textit{(W1, M4)}, \textit{(W2, M3)}, \textit{(W3, M2)}, \textit{(W4, M1)}.\newline \newline
+\textbf{Note:} If the man-optimal and woman-optimal are \textit{equal}, this is the \textbf{only stable matching}.
+
+\end{document}
+
+
+
+
+
