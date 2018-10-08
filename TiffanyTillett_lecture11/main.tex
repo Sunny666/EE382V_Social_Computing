@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \graphicspath{ {./} }
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 \setlength{\oddsidemargin}{0.25 in}
 \setlength{\evensidemargin}{-0.25 in}
@@ -93,7 +94,7 @@
 
 \begin{document}
 %FILL IN THE RIGHT INFO.
-\lecture{11}{September 29}{Vijay Garg}{Tiffany Tillett}{Stable Marriage}
+\lecture{4 Session 1}{September 29}{Vijay Garg}{Tiffany Tillett}{Stable Marriage}
 %\footnotetext{These notes are partially based on those of Nigel Mansell.}
 
 % **** YOUR NOTES GO HERE:
@@ -157,9 +158,9 @@ The algorithm (if it terminates) ends with a stable matching.
 \end{theorem}
 
 \begin{proof}
-Assume that $(m,w)$ is a blocking pair. $m$ is married to $w'$; $w$ is married to $m'$.
+Assume that $(m,w')(m',w)$ is a blocking pair where $m$ is married to $w'$ and $w$ is married to $m'$.
 
-In order for $(m,w)$ to be a blocking pair, this means that $m$ must prefer $w$ to $w'$ and that $w$ must prefer $m$ to $m'$.
+In order for $(m,w')(m',w)$ to be a blocking pair, this means that $m$ must prefer $w$ to $w'$ and that $w$ must prefer $m$ to $m'$.
 
 Since $m$ prefers $w$ to $w'$, he would have proposed to $w$ first and gotten rejected.
 
@@ -167,7 +168,7 @@ Invariant: A woman's assignment can only improve with execution of the algorithm
 
 Therefore, $w$ can only have rejected $m$ if she had a proposal from someone she preferred more. If that person was $m'$, we know that she must prefer $m'$ to $m$. If that person was not $m'$, we know that she prefers that person to $m$ and that she prefers $m'$ to that person, so by extension, she prefers $m'$ to $m$. Generally, $w$ will always prefer her current fiance to all men she rejected, so she must prefer $m'$ to $m$. 
 
-The requirement for $(m,w)$ to be a blocking pair was that $m$ must prefer $w$ to $w'$ and that $w$ must prefer $m$ to $m'$. These two requirements cannot co-exist, so by contradiction, we know that $(m,w)$ cannot be a blocking pair.
+The requirement for $(m,w)$ to be a blocking pair was that $m$ must prefer $w$ to $w'$ and that $w$ must prefer $m$ to $m'$. These two requirements cannot co-exist, so by contradiction, we know that $(m,w')(m',w)$ cannot be a blocking pair.
 \end{proof}
 
 \section{Posets: Partially Ordered Sets}
@@ -204,17 +205,17 @@ $M1 = (1,3,1)$; $M2 = (2,1,2)$
 $1 \leq 2$, $3 > 1$. What does this mean?
 
 \begin{definition}
-$M1$ is incomparable to $M2$ if $!(M1 \leq M2) and !(M2 \leq M1)$.
+$M1$ is incomparable to $M2$ if $(M1 \nleq M2)$ and $(M2 \nleq M1)$.
 \end{definition}
 
 \vspace{3mm} %5mm vertical space
 
 \subsection{Example 2}
-$z = \{a, b c\}$
+$z = \{a, b, c\}$
 
 $X$: \{ \{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\} \}
 
-$\leq$: subset operation
+$\leq$: $\subseteq$
 \newline
 
 $\{a,b\} \leq \{a,b,c\}$
@@ -249,7 +250,11 @@ $a \leq c$
 
 $b \leq d$
 
+$e \leq c$
+
 $c$ and $d$ are incomparable
+
+$a$ and $e$ are incomparable
 
 \subsection{Operations on Posets}
 Given a poset $(X, \leq)$:
