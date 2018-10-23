@@ -1,0 +1,44 @@
+% arara: pdflatex
+
+\documentclass{article}
+\usepackage[demo]{graphicx}
+\usepackage{subcaption}
+\usepackage{showframe}
+\usepackage{blindtext}
+\usepackage[export]{adjustbox}
+
+\begin{document}
+\blindtext
+\begin{figure}[h]
+    \begin{subfigure}[t]{0.46\textwidth}
+        \includegraphics[width=1.1\linewidth,center]{1}
+        \caption{1}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.46\textwidth}
+        \includegraphics[width=1.1\linewidth,center]{2}
+        \caption{2}
+    \end{subfigure}%
+
+    \begin{subfigure}[t]{0.46\textwidth}
+        \includegraphics[width=1.1\linewidth,center]{3}
+        \caption{3}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.46\textwidth}
+        \includegraphics[width=1.1\linewidth,center]{4}
+        \caption{4}
+    \end{subfigure}%
+    \caption{blabla}
+\end{figure}
+\blindtext
+\begin{minipage}{0.5\textwidth}
+\includegraphics[width=\textwidth]{pic1}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+on pic 1 you find the word pic 1\\
+on pic 1 you find the word pic 1\\
+on pic 1 you find the word pic 1\\
+on pic 1 you find the word pic 1\\
+on pic 1 you find the word pic 1\ \vspace{2.5cm}\\
+\end{minipage}
+
+\end{document}

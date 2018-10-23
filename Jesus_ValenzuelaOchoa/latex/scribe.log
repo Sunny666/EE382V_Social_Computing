@@ -1,0 +1,332 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6800 64-bit) (preloaded format=pdflatex 2018.8.31)  2 SEP 2018 16:06
+entering extended mode
+**./scribe.tex
+(scribe.tex
+LaTeX2e <2018-04-01> patch level 5
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cl
+s"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size10.clo
+"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphi
+cs.sty"
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.s
+ty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\gr
+aphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pd
+ftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphi
+cx.sty"
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval
+.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\wrapfig\wrapfig
+.sty"
+\wrapoverhang=\dimen105
+\WF@size=\dimen106
+\c@WF@wrappedlines=\count88
+\WF@box=\box26
+\WF@everypar=\toks15
+Package: wrapfig 2003/01/31  v 3.6
+)
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lipsum\lipsum.s
+ty"
+Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
+\c@lips@count=\count89
+)
+\c@lecnum=\count90
+\c@theorem=\count91
+ (scribe.aux)
+\openout1 = `scribe.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf
+.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count92
+\scratchdimen=\dimen107
+\scratchbox=\box27
+\nofMPsegments=\count93
+\nofMParguments=\count94
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count95
+\MPscratchDim=\dimen108
+\MPnumerator=\count96
+\makeMPintoPDFobject=\count97
+\everyMPtoPDFconversion=\toks17
+)
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstop
+df-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infw
+arerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext
+.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kvde
+finekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxc
+mds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvopti
+ons.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kvse
+tkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\etex
+cmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\iflu
+atex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\pdft
+excmds.sty"
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpd
+f.sty"
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 111.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 111.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 111.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 114.
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--116
+
+ []
+
+<./images/split.png, id=1, 464.4853pt x 781.41937pt>
+File: ./images/split.png Graphic file (type png)
+<use ./images/split.png>
+Package pdftex.def Info: ./images/split.png  used on input line 127.
+(pdftex.def)             Requested size: 464.48418pt x 781.41747pt.
+
+Overfull \hbox (39.76202pt too wide) in paragraph at lines 127--128
+[][] 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 132.
+
+("C:\Users\jvalenzu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
+ [1
+
+{C:/Users/jvalenzu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 146--148
+
+ []
+
+<./images/altPath.png, id=18, 1107.38719pt x 279.29344pt>
+File: ./images/altPath.png Graphic file (type png)
+<use ./images/altPath.png>
+Package pdftex.def Info: ./images/altPath.png  used on input line 155.
+(pdftex.def)             Requested size: 1107.3845pt x 279.29276pt.
+
+Overfull \hbox (27.42097pt too wide) in paragraph at lines 155--156
+ [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
+
+<./images/invertColors.png, id=19, 847.66687pt x 176.15813pt>
+File: ./images/invertColors.png Graphic file (type png)
+<use ./images/invertColors.png>
+Package pdftex.def Info: ./images/invertColors.png  used on input line 165.
+(pdftex.def)             Requested size: 847.6648pt x 176.15768pt.
+[2 <./images/split.png> <./images/altPath.png> <./images/invertColors.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 174--176
+
+ []
+
+<./images/BFSTree.png, id=27, 486.31688pt x 498.36188pt>
+File: ./images/BFSTree.png Graphic file (type png)
+<use ./images/BFSTree.png>
+Package pdftex.def Info: ./images/BFSTree.png  used on input line 178.
+(pdftex.def)             Requested size: 486.31569pt x 498.36066pt.
+
+Overfull \hbox (56.40244pt too wide) in paragraph at lines 178--179
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
+
+ []
+
+<./images/cyclePath.png, id=28, 637.63219pt x 301.8778pt>
+File: ./images/cyclePath.png Graphic file (type png)
+<use ./images/cyclePath.png>
+Package pdftex.def Info: ./images/cyclePath.png  used on input line 212.
+(pdftex.def)             Requested size: 637.63063pt x 301.87706pt.
+[3 <./images/BFSTree.png> <./images/cyclePath.png>]
+<./images/weakDuality.png, id=34, 1296.34312pt x 658.71094pt>
+File: ./images/weakDuality.png Graphic file (type png)
+<use ./images/weakDuality.png>
+Package pdftex.def Info: ./images/weakDuality.png  used on input line 222.
+(pdftex.def)             Requested size: 1296.33997pt x 658.70932pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--228
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--228
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
+
+ []
+
+<./images/vertexCover.png, id=35, 291.33844pt x 511.15968pt>
+File: ./images/vertexCover.png Graphic file (type png)
+<use ./images/vertexCover.png>
+Package pdftex.def Info: ./images/vertexCover.png  used on input line 232.
+(pdftex.def)             Requested size: 291.33772pt x 511.15842pt.
+[4 <./images/weakDuality.png> <./images/vertexCover.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
+
+ []
+
+<./images/minMax.png, id=41, 947.03813pt x 203.25937pt>
+File: ./images/minMax.png Graphic file (type png)
+<use ./images/minMax.png>
+Package pdftex.def Info: ./images/minMax.png  used on input line 246.
+(pdftex.def)             Requested size: 947.03581pt x 203.25887pt.
+<./images/KM.png, id=42, 437.38406pt x 718.18312pt>
+File: ./images/KM.png Graphic file (type png)
+<use ./images/KM.png>
+Package pdftex.def Info: ./images/KM.png  used on input line 252.
+(pdftex.def)             Requested size: 437.38298pt x 718.18137pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--253
+[][]
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 263.
+[5 <./images/minMax.png> <./images/KM.png>] (scribe.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1780 strings out of 492973
+ 26316 string characters out of 3125363
+ 185906 words of memory out of 3000000
+ 5645 multiletter control sequences out of 15000+200000
+ 6773 words of font info for 24 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,6n,25p,275b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb><C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jvalenzu/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jvalenzu/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jva
+lenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.p
+fb><C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmmi7.pfb><C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb><C:/Users/jvalenzu/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jvalenzu/AppData/Loca
+l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jvalenz
+u/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><
+C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb><C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmsy7.pfb><C:/Users/jvalenzu/AppData/Local/Programs/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on scribe.pdf (5 pages, 863781 bytes).
+PDF statistics:
+ 89 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+
