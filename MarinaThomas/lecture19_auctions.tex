@@ -1,0 +1,193 @@
+%
+% This is the LaTeX template file for lecture notes for EE 382C/EE 361C.
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi.
+%
+% This template is based on the template for Prof. Sinclair's CS 270.
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\usepackage{qtree}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382V: Social Computing
+                        \hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{19}{October 27}{Vijay Garg}{Marina Thomas}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Auctions}
+
+Auctions have been part of the history of world economy for a very long time. Today, this kind of economic activity is very prominent even in the internet world. For example, various search companies like Google,Yahoo! and Microsoft uses the auction format to sell slots for sponsored content. The very high demand for these slots have caused it to be priced very high. In this lecture we will study the behavior of buyers and sellers during auctions.
+
+\subsection{Types of Auctions}
+A primary concept when modelling auctions is that each bidder has an intrinsic value for the item being auctioned i.e a price up to which he/she is willing to pay for the the item, but not any higher. This price is also referred to as bidders' true value.
+
+Consider the case of a seller auctioning a painting to buyers. Say that the seller has a valuation for the painting as, 100,000 and consider buyers' valuation in dollars as below:
+
+\begin{itemize}
+  \item 200,000
+  \item 250,000
+  \item 98,000
+  \item 300,000
+\end{itemize}
+
+In the above example as the seller's valuation is \$100,000 and the maximum valuation by a buyer/bidder is \$300,000, we say that there is a surplus of \$200,000 that can be generated by the sale of this item, that will go from the buyer to the seller.
+
+\textbf{\textit{Knowledge of the system:}}
+
+Consider a system in which the seller and buyers know each others' true values.
+
+\textbf{Case 1: Seller gets to decide the price/commitment mechanism.}\newline
+If the seller knows the above declared true values assigned to the item by the bidders, and if he could set the price, he will simply set it to just below \$300,000, and declare that he will not accept any lower price. The buyer with value \$300,000 will buy the item, and the full value of the surplus, i.e. \$ 200,000 will go to the seller. In this case, the seller has no need for an auction: he gets as much as he could reasonably expect just by announcing the right price.
+
+\textbf{Case 2: Bidder to decide the price/commitment mechanism.}\newline
+The bidder with true valuation \$ 300,000 could announce that she is willing to purchase the item for a price just above the larger of \$ 100,000 and the values held by all other buyers(i.e \$ 250,000). With this announcement, the seller would still be willing to sell since the price would be above \$ 100,000. In this case seller gets \$150,000 surplus and \$ 50,000 of the surplus will go to the buyer. As with the seller's commitment, this commitment by the buyer also requires knowledge of everyone else's true values.
+
+Is it possible to develop an algorithm where each player need not reveal their valuation? 
+
+A mechanism for that could be auctions.
+
+Most of the revenue for Google comes from selling the slots through auctions.
+Below tree shows the different kinds of auctions we will explore as part of this lecture.\newline
+
+\Tree [.Auctions  [.{Interactive Auctions} {Ascending Price} {Descending Price} ]  [.{Sealed bid auctions} {First Price} {Second Price} ] ]\newline
+
+Ascending price auctions are also called English auctions. Similarly descending price auctions are also called Dutch auctions.
+
+For ascending price auctions, the auction starts at a low value and is incremented in small deltas. As the price increases, bidders drop out when the amount crosses their true value. Finally the bidder with the second highest bid also will drop out when the amount is greater than his true value and only one bidder will remain, the one with the highest value bid and he will win the auction at the currently incremented price.
+
+For descending price auctions, the bid starts at a very high value, say 1 million and the amount is brought down in small deltas. When the amount reaches the true value of the highest bidder, he wins the auction and will pay his true value.
+
+In first price auctions, the bidder with the highest bid wins the auction and will pay his true value.
+
+In second price auctions, the the highest bidder will win the object and will pay the value of the second highest bid. These auctions are also called Vickery auctions.
+
+For now we can assume that there are no ties.
+
+For sealed bid auctions, the participants reveal the valuation to a central agency. There is only one chance for each bidder and the winner is the one with highest price. Based on the format of the auction the bidder either pays second price or first price.
+
+For the previously mentioned example, consider the scenario where buyers lie for second price auctions:
+\begin{itemize}
+  \item 200,000 -  consider bidder lied and put value as 275,000 - Scenario (a)
+  \item 250,000 - consider bidder lied and put value as 301,000 - Scenario (b)
+  \item 98,000
+  \item 300,000 - consider bidder lied and put value as 248,000 - Scenario (c)
+\end{itemize}
+
+The impact of the above actions
+\begin{itemize}
+  \item (a) - Bidder lied and added 275,000 as value. There will be no impact on him. However, the highest bidder will have to now pay 275,000 and so his surplus will be reduced to \$25,000. However, for seller, this will be an additional gain of \$25,000
+  \item (b) - The bidder lied and added 301,000 as the value. As the highest bid now belong to this bidder, he will win the auctioned item and there will be a loss of 50,000 for this bidder. As in the previous case this will be an advantage for the seller.
+  \item (c) The bidder lied and put value as 248,000. The bidder will loose the bid and will loose \$52,000 as he his true value was \$300,000
+\end{itemize}
+
+Based on the above, it can be inferred that for second price auctions, dominant strategy is to tell the truth. Here DSIC or Dominant Strategy Incentive Compatible Mechanism is being truthful
+
+Another example is stable matching.
+
+When we design algorithm/mechanism for auctions, it will be nice if it has nice properties like DSIC and social welfare etc.
+
+For first price auction, there is no pay off for the buyer. Participants tend to make lower valuation.
+
+Why will a seller opt for second price auction?
+For first price auctions, no one might turn up or, people might under value the item.
+
+eBay uses second price auction.
+\end{document}
+
+
+
+
+
