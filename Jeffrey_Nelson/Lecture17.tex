@@ -1,0 +1,254 @@
+%
+% This is the LaTeX template file for lecture notes for EE 382V
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi.
+%
+% This template is based on the template for Prof. Sinclair's CS 270.
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382V: Social Computing
+                        \hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{17}{October 26}{Vijay Garg}{Jeffrey D Nelson}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Games with Multiple Nash Equilibria}
+There are certain games in which more than one Nash Equilibrium exists. The following figure depicts a game in which you and a partner are preparing slides for a presentation. Each of you can choose to prepare the slides with either Microsoft PowerPoint or Apple Keynote.
+
+% Insert Table 1
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & ppt & keynote \\
+        \hline
+        ppt & 1,1 & 0,0 \\
+        \hline
+        keynote & 0,0 & 1,1 \\
+        \hline
+    \end{tabular}
+    \caption{Combining Presentation Slides}
+    \label{tab:slides}
+\end{table}
+
+If you choose a different presentation tool than your partner, you will both get a payoff of 0, as you will be unable to combine your slides. Your best response is to choose the same tool as your partner, regardless of the tool chosen. For this reason, (ppt, ppt) and (keynote, keynote) are both Nash Equilibrium.
+
+\subsection{Battle Of The Sexes}
+Another game with multiple Nash Equilibria is the Battle of the Sexes, where you and your significant other go to see a movie together and must choose between Action and Romance.
+
+% Insert Table 2
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & romance & action \\
+        \hline
+        romance & 2,1 & 0,0 \\
+        \hline
+        action & 0,0 & 1,2 \\
+        \hline
+    \end{tabular}
+    \caption{Battle of the Sexes}
+    \label{tab:battleOfTheSexes}
+\end{table}
+
+In this game, both (romance, romance) and (action, action) are Nash Equilibrium, but one player will receive a higher payoff.
+
+\section{Schelling's Focal Point}
+For games in which there are multiple Nash Equilibria, there may be one NE that is more likely to be chosen because of information available outside of the context of the game. For example, in the game combining presentation slides, (ppt, ppt) may be more likely due to PowerPoint being more popular than Keynote. We call this point the \textbf{Schelling Focal Point} and define it as the point most likely to be chosen in the absence of communication.
+
+\section{Games with No Nash Equilibrium}
+Consider the following game, in which you and a friend flip two pennies. If the pennies match, you receive a payoff of 1 and your friend receives a payoff of -1. Otherwise, you receive a payoff of -1 and your friend receives a payoff of 1.
+
+% Insert Table 3
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & heads & tails \\
+        \hline
+        heads & 1,-1 & -1,1 \\
+        \hline
+        tails & -1,1 & 1,-1 \\
+        \hline
+    \end{tabular}
+    \caption{Matching Pennies}
+    \label{tab:matchingPennies}
+\end{table}
+
+This game is also called a \textbf{Zero-Sum Game} as the overall payoff is always zero. It should be clear that there is no Nash Equilibrium, as there is no pair of strategies that are best responses to each other.
+
+\subsection{Mixed Strategy for Matching Pennies}
+As we learned in the previous lecture, there exists at least one Nash Equilibrium in a finite game where each player is using a mixed strategy. To derive the NE for Matching Pennies, we define the following:
+\begin{itemize}
+    \item Player2 chooses heads with probability $q$ and tails with probability $1-q$.
+    \item Player1 chooses heads with probability $p$ and tails with probability $1-p$.
+\end{itemize}
+
+Payoffs for player1:
+\begin{itemize}
+    \item Payoff for choosing heads:
+    \begin{equation}
+        (q)(1) + (1-q)(-1) \rightarrow 2q - 1
+    \end{equation}
+    \item Payoff for choosing tails:
+    \begin{equation}
+        (q)(-1) + (1-q)(1) \rightarrow 1 - 2q
+    \end{equation}
+\end{itemize}
+
+Player1 must be "indifferent" about his responses, so we solve:
+\begin{equation}
+    1 - 2q = 2q - 1 \rightarrow q = \frac{1}{2}
+\end{equation}
+In solving for player2's expected payoff w/ respect to p, we see that $p=1/2$ from the symmetric principle. Therefore, the Nash Equilibrium for Matching Pennies is:
+\begin{equation}
+    [ (\frac{1}{2}, \frac{1}{2}), (\frac{1}{2}, \frac{1}{2}) ]
+\end{equation}
+In other words, player1 chooses heads with probability 0.5 and tails with probability 0.5, as does player2.
+\pagebreak
+
+\subsection{Football Plays}
+Consider the following game of football. An offense can choose to pass or run the ball, while a defense can choose to defend against the pass or the run. The following matrix defines the payoff for each strategy.
+
+% Insert Table 4
+\vspace{4mm}
+\centerline{\hspace{2cm}defense}
+\begin{table}[h]
+    \centering
+    offense\hspace{4mm}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & defend pass & defend run \\
+        \hline
+        pass & 0,0 & 10,-10 \\
+        \hline
+        run & 5,-5 & 0,0 \\
+        \hline
+    \end{tabular}
+    \caption{Football Plays}
+    \label{tab:footballPlays}
+\end{table}
+
+Our goal is to compute a Nash Equilibrium vector for each team's mixed strategy, and so we define the following:
+\begin{itemize}
+    \item Offense passes with probability $p$
+    \item Defense defends the pass with probability $q$
+\end{itemize}
+
+Expected payoff for offense when choosing to pass:
+\begin{equation}
+    (q)(0) + (1-q)(10) \rightarrow 10 - 10q
+\end{equation}
+\\
+Expected payoff for offense when choosing to run:
+\begin{equation}
+    (q)(5) + (1-q)(-5) \rightarrow 5q
+\end{equation}
+
+By the indifference principle:
+\begin{equation}
+    10 - 10q = 5q \rightarrow q = 2/3
+\end{equation}
+
+By the symmetric principle, we could solve for the defense's expected payoff and get $p=\frac{1}{3}$. Therefore, the Nash Equilibrium vector for this game is:
+\begin{equation}
+    [(pass=\frac{1}{3}, run=\frac{2}{3}), (defendPass=\frac{2}{3}, defendRun=\frac{1}{3})]
+\end{equation}
+
+\end{document}
+
