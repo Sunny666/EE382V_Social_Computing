@@ -1,0 +1,212 @@
+%
+% This is the LaTeX scribe file for lecture notes for EE 382v Social Computing.
+% Scribe: Jose Carlos Martinez Garcia-Vaso - jcm3767
+%
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\usepackage{multirow}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382V: Social Computing
+                        \hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{15}{October 26}{Vijay Garg}{Jose Carlos Martinez Garcia-Vaso}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Game Theory}
+
+\subsection{Introduction}
+Everything in life is like a a game. We make choices for everything we do, and the consequences of those choices can reward or penalize us. For example, we might be faced with the choice to take Mo-Pac or i35 in our morning commute. Choosing the best route will make for a faster commute. These choices are not made in isolation, but they are often based on the action of other players in the game. Back to the morning commute example, we might choose to take Mo-Pac over i35 because less people are choosing that option, and there is less traffic. This idea is at the core of game theory.
+
+John von Newman stated the field of game theory by studying the zero-sum games. Later on, game theory was generalized by John Nash, with his contributions on finite games. Nash was awarded the Nobel Prize for his contributions to game theory.
+
+\subsection{Ingredients of Game Theory}
+\begin{enumerate}
+  \item \textbf{Players}: $N = \{1, 2, \ldots,  n\}$
+  
+  The players are the participants in the game.
+  
+  \item \textbf{Actions/strategies}:
+  
+  Strategies are the options or choices the players can make during the game. We will assume there is a finite number of strategies that a player can use.
+  
+  \item \textbf{Utility function}: $U_i = (S_1, S_2, \ldots, S_n)$
+  
+  The utility function quantifies the utility of the strategies to the players with respect to the other players choice of strategies. We assume that we know the utility of all the actions available to all the players, so that we know the utility of our actions depending on the other players' actions. This is necessary for the analysis.
+\end{enumerate}
+
+\subsection{The Two Player Game}
+Consider the following game. Two students are faced with the option of spending most of their time preparing for a presentation or studying for an exam. If a student chooses to spend most of his time studying for the exam he will get a grade of 92 in the exam. However, if he prepares for the presentation, he will get an 80 in the exam instead. Both students are paired together to work on the presentation, and their presentation grade depends on the work that both of them put into it. If both students choose to spend most of their time working in the presentation, they will both get a 100 in the presentation. If only one student spends most of her time in the presentation, both students will get a 92. Finally, if none of the students chooses to work on the presentation, they will get an 84.
+
+The utility function for the previously explained strategies can be summarized in bi-matrix (normal) form as shown in {\em Table \ref{table:presentation1}}. In the utility function we consider the final total grade of the students, which is obtained from the average of the grades for the exam and the presentation.
+
+\begin{table}[ht]
+\begin{center}
+\caption{Presentation-Exam game utility function in bi-matrix (normal) form.}
+\label{table:presentation1}
+\begin{tabular}{l l p{7em} p{7em}}
+                                                        &                                            & \multicolumn{2}{c}{\textbf{Student 2}}                    \\
+                                                        &                                            & \textbf{Presentation}       & \textbf{Exam}               \\ \cline{3-4} 
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{Student 1}}} & \multicolumn{1}{c|}{\textbf{Presentation}} & \multicolumn{1}{c|}{90, 90} & \multicolumn{1}{c|}{86, 92} \\ \cline{3-4} 
+\multicolumn{1}{c}{}                                    & \multicolumn{1}{c|}{\textbf{Exam}}         & \multicolumn{1}{c|}{92, 86} & \multicolumn{1}{c|}{88, 88} \\ \cline{3-4} 
+\end{tabular}
+\end{center}
+\end{table}
+
+Below are the all possible combination of strategies the students may pick:
+
+\begin{itemize}
+  \item \textbf{(Presentation, Presentation)}: Both students work on their presentations, then, they both get a 100 in the presentation and an 80 in the exam. Their final grade is 90.
+  
+  \item \textbf{(Presentation, Exam) / (Exam, Presentation)}: Both students get a 92 in the presentation, because one of them worked on the presentation. The student that worked on the exam will get a 92 in the exam, and the other an 80. The final grades are 86 for the student that worked in the presentation, and 92 for the student that worked in the exam.
+  
+  \item \textbf{(Exam, Exam)}: Both students worked on the exam, then, they both get a 92 in the exam and an 84 in the presentation. Their final grade is 88.
+\end{itemize}
+
+For the analysis of the game, assume the following:
+
+\begin{enumerate}
+  \item \textbf{Rational selfish players}: The players will use the strategy that provides them with the highest utility (payoff), regardless of how their strategies affect the other players.
+  
+  \item \textbf{Common knowledge of the game structure}: Every player knows the utility function. That is they know how every action they take will compare to every possible action by the other players. Moreover, players know the other players are also rational and selfish.
+\end{enumerate}
+
+The first thing to look when analyzing a game is if there exist a dominant strategy.
+
+\begin{definition}
+A \textbf{dominant strategy} is a strategy that is better (the utility for that strategy is greater or equal) than all the other strategies regardless of the strategies the other players choose.
+\end{definition}
+
+In the previous example, Exam is a dominant strategy. The utility for a player choosing the Exam strategy is greater or equal than any other strategy the other player can choose. Moreover, if a strategy yields a utility strictly greater than any strategy the other player can choose, that strategy is strictly dominant. In this case, Exam is also strictly dominant.
+
+\begin{definition}
+A \textbf{strictly dominant strategy} is a strategy that is strictly better (the utility for that strategy is strictly greater) than all the other strategies regardless of the strategies the other players choose.
+\end{definition}
+
+Different utility functions yield different dominant strategies. For example, let's alter the previous game's utility function to that shown in {\em Table \ref{table:presentation2}}. In this case, Presentation will be the strictly dominant strategy.
+
+\begin{table}[ht]
+\begin{center}
+\caption{Modified Presentation-Exam game utility function.}
+\label{table:presentation2}
+\begin{tabular}{l l p{7em} p{7em}}
+                                                        &                                            & \multicolumn{2}{c}{\textbf{Student 2}}                    \\
+                                                        &                                            & \textbf{Presentation}       & \textbf{Exam}               \\ \cline{3-4} 
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{Student 1}}} & \multicolumn{1}{c|}{\textbf{Presentation}} & \multicolumn{1}{c|}{98, 98} & \multicolumn{1}{c|}{94, 96} \\ \cline{3-4} 
+\multicolumn{1}{c}{}                                    & \multicolumn{1}{c|}{\textbf{Exam}}         & \multicolumn{1}{c|}{96, 94} & \multicolumn{1}{c|}{92, 92} \\ \cline{3-4} 
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{The Prisoner's Dilemma}
+Consider the following scenario. Two subjects are arrested and imprisoned for the same crime. Each prisoner is in solitary confinement with no means of communicating with the other. The prosecutors lack sufficient evidence to convict the prisoners on the principal charge, but they have enough to convict both on a lesser charge, such as resisting arrest. Simultaneously, the prosecutors offer each prisoner a bargain. Each prisoner is given the opportunity either to confess that the other committed the crime, or to not confess and cooperate with the other prisoner by remaining silent. The offer gives the utility function in {\em Table \ref{table:prisoner}}.
+
+\begin{table}[ht]
+\begin{center}
+\caption{Prisoner's dilemma utility function.}
+\label{table:prisoner}
+\begin{tabular}{l l p{7em} p{7em}}
+                                                        &                                            & \multicolumn{2}{c}{\textbf{Prisoner 2}}                    \\
+                                                        &                                            & \textbf{Not Confess}       & \textbf{Confess}               \\ \cline{3-4} 
+\multicolumn{1}{c}{\multirow{2}{*}{\textbf{Prisoner 1}}} & \multicolumn{1}{c|}{\textbf{Not Confess}} & \multicolumn{1}{c|}{-1, -1} & \multicolumn{1}{c|}{-10, 0} \\ \cline{3-4} 
+\multicolumn{1}{c}{}                                    & \multicolumn{1}{c|}{\textbf{Confess}}         & \multicolumn{1}{c|}{0, -10} & \multicolumn{1}{c|}{-4, -4} \\ \cline{3-4} 
+\end{tabular}
+\end{center}
+\end{table}
+
+The prisoner's dilemma game has the strictly dominant strategy of Confess for both players. Therefore, we expect both prisoners to confess and serve 4 years in prison. However, they would be better off if both of them choose not to confess. In that case they would only serve 1 year. A dominant strategy is not necessarily socially optimal.
+
+\end{document}
+
+
+
+
+
