@@ -1,0 +1,215 @@
+%
+% This is the LaTeX template file for lecture notes for EE 382C/EE 361C.
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi.
+%
+% This template is based on the template for Prof. Sinclair's CS 270.
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382C/361C: Multicore Computing
+                        \hfill Fall 2016} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{1}{November 16}{Vijay Garg}{Guillermo Le\'on}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Chapter 6 Exercises}
+
+\begin{enumerate}
+    \setcounter{enumi}{9}
+    \item In the payoff matrix below the rows correspond to player A's strategies and the columns correspond to player B's strategies. The first entry in each box is player A's payoff and the second entry is player B's payoff.
+    
+    \begin{center}
+        \begin{tabular}{llll}
+                                  &                        & \multicolumn{2}{l}{Player B}                        \\
+                                  &                        & L                        & R                        \\ \cline{3-4} 
+        \multirow{2}{*}{Player A} & \multicolumn{1}{l|}{U} & \multicolumn{1}{l|}{3,3} & \multicolumn{1}{l|}{1,2} \\ \cline{3-4} 
+                                  & \multicolumn{1}{l|}{D} & \multicolumn{1}{l|}{2,1} & \multicolumn{1}{l|}{3,0} \\ \cline{3-4} 
+        \end{tabular}    
+    \end{center}
+    
+    \begin{enumerate}
+        \item Find all pure strategy Nash equilibria of this game. \\
+        
+        Let's try first finding dominant strategies. In this game we can see that Player B has $L$ as a strictly dominant strategy since $P_B(U, L) > P_B(U, R)$ and $P_B(D, L) > P_B(D, R)$. In other words, strategy $L$ is always the strict best response to whichever strategy Player A chooses. Because this is the case, it is expected that Player B will go with $L$, therefore the best response from Player A to $L$ is $U$ because it maximizes her payoff. The only pure strategy Nash equilibrium is $(U, L)$. \\
+        
+        \begin{center}
+            \begin{tabular}{llll}
+                                       &                                 & \multicolumn{2}{c}{Player B}                                                      \\
+                                       &                                 & \multicolumn{1}{c}{\textit{L}}                   & \multicolumn{1}{c}{\textit{R}} \\ \cline{3-4} 
+                                       & \multicolumn{1}{l|}{\textit{U}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}3,3} & \multicolumn{1}{l|}{1,2}       \\ \cline{3-4} 
+            \multirow{-2}{*}{Player A} & \multicolumn{1}{l|}{\textit{D}} & \multicolumn{1}{l|}{2,1}                         & \multicolumn{1}{l|}{3,0}       \\ \cline{3-4} 
+            \end{tabular}    
+        \end{center}
+        
+        \item Notice from the payoff matrix above that Player A's payoff from the pair of strategies (\textsl{U, L}) is 3. Can you change player A's payoff from this pair of strategies to some non-negative number in such a way that the resulting game has \emph{no} pure-strategy Nash equilibrium? Give a brief (1-3 sentence) explanation for your answer. \\
+        (Note that in answering this question, you should only change Player A's payoff for this one pair of strategies (\textsl{U, L}). In particular, leave the rest of the structure of the game unchanged: the players, their strategies, the payoff from strategies other than (\textsl{U, L}), and B's payoff from (\textsl{U, L}).) \\
+        
+        \emph{No}, as it was stated in the answer above, Player B is indifferent of the payoff of Player A. In the original case Player A does not have a dominant strategy, let's say that we modify $P_A(U, L) = 1$. In this case Player A now has a strictly dominant strategy $D$, however the best response from Player B is still to go $L$. This only moves the Nash equilibrium from $(U, L)$ to $(D, L)$. 
+        
+        \begin{center}
+            \begin{tabular}{llll}
+                                       &                                 & \multicolumn{2}{c}{Player B}                                                      \\
+                                       &                                 & \multicolumn{1}{c}{\textit{L}}                   & \multicolumn{1}{c}{\textit{R}} \\ \cline{3-4} 
+                                       & \multicolumn{1}{l|}{\textit{U}} & \multicolumn{1}{l|}{\textbf{1},3}                & \multicolumn{1}{l|}{1,2}       \\ \cline{3-4} 
+            \multirow{-2}{*}{Player A} & \multicolumn{1}{l|}{\textit{D}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}2,1} & \multicolumn{1}{l|}{3,0}       \\ \cline{3-4} 
+            \end{tabular}
+        \end{center}
+        
+        Finally let's suppose we change the payoff $P_A(D, L) = 3$, in this case we now have 2 Nash equilibria because $U$ and $D$ are both best responses to $L$ from player B. \\
+        
+        \begin{center}
+            \begin{tabular}{llll}
+                                       &                                 & \multicolumn{2}{c}{Player B}                                                               \\
+                                       &                                 & \multicolumn{1}{c}{\textit{L}}                            & \multicolumn{1}{c}{\textit{R}} \\ \cline{3-4} 
+                                       & \multicolumn{1}{l|}{\textit{U}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}3,3}          & \multicolumn{1}{l|}{1,2}       \\ \cline{3-4} 
+            \multirow{-2}{*}{Player A} & \multicolumn{1}{l|}{\textit{D}} & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}\textbf{3},1} & \multicolumn{1}{l|}{3,0}       \\ \cline{3-4} 
+            \end{tabular}
+        \end{center}
+
+        \item Now let's go back to the original payoff matrix from part (a) and ask an analogous question about player B. So we're back to the the payoff matrix in which players A and B each get a payoff of 3 from the pair of strategies (\textsl{U, L}). \\
+        Can you change player B's payoff from the pair of strategies (\textsl{U, L}) to some non-negative number in such a way that the resulting game has \emph{no} pure-strategy Nash equilibrium? Give a brief (1-3 sentence) explanation for your answer. \\
+        (Again, in answering this question, you should only change Player B's payoff for this one pair of strategies (\textsl{U, L}). In particular, leave the rest of the structure of the game unchanged: the players, their strategies, the payoff from strategies other than (\textsl{U, L}), and A's payoff from (\textsl{U, L}).) \\
+        
+        \emph{Yes}, since Player B has a strictly dominant strategy it is just a matter of removing it. If we set the payoff for player B for the pair of strategies $U$ and $L$ to 1 or 0. In this case neither of the players have a dominant strategy. Let's analyze then the best responses for each player and each strategy.
+        Player A chooses $U$, then best response from player B is $R$, but if player B chooses $R$ then best response from player A is $D$. Finally if player A chooses $D$, then the best response from B is $L$ and when player B chooses $L$, the best response from player A is $U$, which is the initial strategy. Therefore there is no pure strategy Nash equilibrium.
+        
+        \begin{center}
+            \begin{tabular}{llll}
+                                      &                                 & \multicolumn{2}{c}{Player B}                                       \\
+                                      &                                 & \multicolumn{1}{c}{\textit{L}}    & \multicolumn{1}{c}{\textit{R}} \\ \cline{3-4} 
+            \multirow{2}{*}{Player A} & \multicolumn{1}{l|}{\textit{U}} & \multicolumn{1}{l|}{3,\textbf{1}} & \multicolumn{1}{l|}{1,2}       \\ \cline{3-4} 
+                                      & \multicolumn{1}{l|}{\textit{D}} & \multicolumn{1}{l|}{2,1}          & \multicolumn{1}{l|}{3,0}       \\ \cline{3-4} 
+            \end{tabular}
+        \end{center}
+        
+        
+    \end{enumerate}
+    
+    \item In the text we've discussed dominant strategies and noted that if a player has a dominant strategy we would expect it to be used. The opposite of a dominant strategy is a strategy that is dominated. The definition of dominated is: \\
+    A strategy $s_i^*$ is \emph{dominated} if player $i$ has another strategy $s_i^\prime$ with the property that player $i$'s payoff is greater from $s_i^\prime$ than from $s_i^*$ no matter what the other players in the game do. \\
+    We do not expect a player to use a strategy that is dominated and this can help in finding Nash equilibria. Here is an example of this idea. In this game, M is a dominated strategy (it is dominated by R) and player B will not use it.
+    
+    \begin{center}
+        \begin{tabular}{lllll}
+                          &                        & \multicolumn{3}{c}{Player B}                                                   \\
+                          &                        & \multicolumn{1}{c}{L}    & \multicolumn{1}{c}{M}    & \multicolumn{1}{c}{R}    \\ \cline{3-5} 
+\multirow{2}{*}{Player A} & \multicolumn{1}{l|}{U} & \multicolumn{1}{l|}{2,4} & \multicolumn{1}{l|}{2,1} & \multicolumn{1}{l|}{3,2} \\ \cline{3-5} 
+                          & \multicolumn{1}{l|}{D} & \multicolumn{1}{l|}{1,2} & \multicolumn{1}{l|}{3,3} & \multicolumn{1}{l|}{2,4} \\ \cline{3-5} 
+        \end{tabular}
+    \end{center}
+    
+    So in analyzing the game we can delete M and look at the remaining game
+    
+    \begin{center}
+        \begin{tabular}{llll}
+                          &                                 & \multicolumn{2}{c}{Player B}                                    \\
+                          &                                 & \multicolumn{1}{c}{\textit{L}} & \multicolumn{1}{c}{\textit{R}} \\ \cline{3-4} 
+\multirow{2}{*}{Player A} & \multicolumn{1}{l|}{\textit{U}} & \multicolumn{1}{l|}{2,4}       & \multicolumn{1}{l|}{3,2}       \\ \cline{3-4} 
+                          & \multicolumn{1}{l|}{\textit{D}} & \multicolumn{1}{l|}{1,2}       & \multicolumn{1}{l|}{2,4}       \\ \cline{3-4} 
+        \end{tabular}
+    \end{center}
+    
+    Now player A has a dominant strategy (U) and it is easy to see that the Nash equilibrium of the 2-by-2 game is (U, L). You can check the original game to see that (U, L) is a Nash equilibrium. Of course, using this procedure requires that we know that a dominated strategy cannot be used in a Nash equilibrium.\footnote{This is actually true for any number of players. It would also help to know that if we iteratively remove dominated strategies (in any order) and analyze the reduced games we still find the Nash equilibria of the original game. This is also true, but it is a bit more complicated.} \\
+    Consider any two player game which has at least one (pure strategy) Nash equilibrium. Explain why the strategies used in an equilibrium of this game will not be dominated strategies. \\
+    
+    Let's recall that strategies in a pure strategy Nash equilibrium are the best responses to each other from both players. More precisely, let's suppose that Player 1 chooses strategy $S$ and Player 2 chooses $T$, then we say that $(S, T)$ are in a Nash equilibrium if $S$ is a best response to $T$, and $T$ is a best response to $S$. Because they are considered best strategies, that means that they produce a payoff that is at least as good as any other strategy. In other words, let's suppose that strategy $S$ is indeed a dominated strategy, this means that there is a strategy $S\prime$ with a greater payoff, therefore $S\prime$ is a best response to a given strategy $T$ and because of this $S$ cannot be part of the Nash equilibrium.
+    
+\end{enumerate}
+
+\end{document}
