@@ -121,7 +121,7 @@ Voting is the aggregation of beliefs / rankings. Examples include gathering Conc
 If we consider a group of people on an island, and they all vote given two choices, it's easy to determine what is preferred by the majority.  But, when you add a third choice, it makes things complicated.  In particular if Alice gives the following preference for choices A, B, and C.
 
 \begin{equation*}
-    \text{We have a Problem!}
+ \text{\textcolor{red}{We have a Problem!}}
     \begin{cases}
         A > B \\
         B > C \\
@@ -201,7 +201,7 @@ Voting in context of plurality is related to comparing 2 choices.  In Table~\ref
      $C_2$ & CK $>$ GF & CK $>$ GF $>$ PF \\
      $C_3$ & CK $>$ GF & CK $>$ GF $>$ PF \\
      $C_4$ & GF $>$ CK & GF $>$ PF $>$ CK \\
-     $C_5$ & GF $<$ CK & GF $>$ PF $>$ CK 
+     $C_5$ & GF $>$ CK & GF $>$ PF $>$ CK 
     \end{tabular}
     \caption{Movie Preferences for Unanimous and IAA Votes}
     \label{tab:ex7}
@@ -231,9 +231,9 @@ Once we add a third option, now the GF becomes the winner.  Furthermore, PF is a
 \newcommand{\cmark}{\textcolor{green}{\ding{51}}}%
 
 \begin{enumerate}
-    \item \textbf{Majority Rule} [U \xmark] [IIA \cmark ] [ ND \cmark ]
+    \item \textbf{Majority Rule} [U \cmark] [IIA \xmark ] [ ND \cmark ]
     \\ A system where the option with the most votes or highest ranking is adopted.  This system can lead to the Condorcet Paradox
-    \item \textbf{Positional Voting} [U \xmark] [IIA \cmark ] [ ND \cmark ]
+    \item \textbf{Positional Voting} [U \cmark] [IIA \xmark ] [ ND \cmark ]
     \\ This system uses Bordat Counting, to assign a number to each choice and the choice with the largest sum wins.  This does not solve the Condorcet Paradox, if selections are symmetric.
     
     \begin{table}[H]
