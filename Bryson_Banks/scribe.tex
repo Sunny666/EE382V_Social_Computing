@@ -99,7 +99,7 @@
 The following two exercises focus on second-price, sealed-bid auctions where a seller is selling some object that bidders each have their own independent, private valuations for.
 
 \subsection{Exercise 9-3}
-(a) Four possible outcomes of two bidders having valuations 0 or 1:
+{\bf(a)} Four possible outcomes of two bidders having valuations 0 or 1:
 
 \begin{itemize}
   \item $(v_{1}, v_{2}) = (0, 0)$: Bidder 1 or 2 wins and pays 0.
@@ -112,7 +112,8 @@ If we equally weight the probability of each of the four possible outcomes above
 
 $$ER_{S} = \frac{1}{4}(0) + \frac{1}{4}(0) + \frac{1}{4}(0) + \frac{1}{4}(1) = \frac{1}{4}$$
 
-(b) Eight possible outcomes of three bidders having valuations 0 or 1:
+\vspace{10mm}
+{\bf(b)} Eight possible outcomes of three bidders having valuations 0 or 1:
 
 \begin{itemize}
   \item $(v_{1}, v_{2}, v_{3}) = (0, 0, 0)$: Bidder 1, 2, or 3 wins and pays 0.
@@ -129,39 +130,87 @@ If we equally weight the probability of each of the eight possible outcomes abov
 
 $$ER_{S} = \frac{1}{8}(0) + \frac{1}{8}(0) + \frac{1}{8}(0) + \frac{1}{8}(1) + \frac{1}{8}(0) + \frac{1}{8}(1) + \frac{1}{8}(1) + \frac{1}{8}(1) = \frac{4}{8} = \frac{1}{2}$$
 
-(c) We see that going from two bidders to three bidders increased the seller's expected revenue. If we were to add in an additional fourth bidder, we would again see the seller's expected revenue increase. The same again with a fifth bidder, and a sixth. In fact, every increase in the total number of bidders will increase the seller's expected revenue because as the number of total bidders increases, so too does the probability that at least two bidders will bid 1, which is the only outcomes where the seller earns any revenue. It makes logical sense that adding bidders will only increase the chances of at least two of them bidding 1, but we also know that probability, while converging to 1, will never actually reach 1. Thus, we see the seller's expected revenue will similarly converge to 1 as the total number of bidders is increased, but never actually reach 1.
+\vspace{10mm}
+{\bf(c)} Comparing the solutions for (a) and (b), we see that going from two bidders to three bidders increased the seller's expected revenue from $\frac{1}{4}$ to $\frac{1}{2}$. If we were to add in an additional fourth bidder, we would again expect to see the seller's expected revenue increase. The same again with a fifth bidder, and a sixth, and so on.
 
+To prove this, we note that the seller will earn 0 anytime less than two bidders bid 1, and 1 otherwise. Thus, in this particular case the seller's expected revenue happens to be equal to the probability that at least two bidders bid 1, or 1 minus the probability that 1 or 0 bidders bid 1.
+
+$$ER_{S} = P(2\>or\>more) = 1 - P(1\>or\>0)$$
+
+$P(1\>or\>0)$ is equal to the number of outcomes where 1 or 0 bidders bid 1 divided by the total number of possible outcomes. Let $n$ be the number of bidders. Then, there are n different outcomes where a single bidder bids 1, and 1 outcome where every bidder bids 0. Additionally, since each bidder has only 2 possible choices, we see there are $2^n$ total possible outcomes.
+
+$$P(1\>or\>0) = \frac{number\>of\>outcomes\>where\>1\>or\>0\>bidders\>bid\>1}{total\>number\>of\>possible\>outcomes} = \frac{n + 1}{2^n}$$.
+
+After substituting, we get a function of $n$, the total number of bidders, to easily calculate the seller's expected revenue for any positive integer number of bidders.
+
+$$ER_{S}(n) = 1 - \frac{n + 1}{2^n}$$
+
+Analyzing the function, we see as n grows, so too does $ER_{S}$. We also see as n grows to infinity, $ER_{S}$ converges to 1, never actually reaching 1.
+
+$$ER_{S}(1) = 0, \;\;ER_{S}(2) = \frac{1}{4}, \;\;ER_{S}(3) = \frac{1}{2}, \;\;ER_{S}(4) = \frac{11}{16}, \;\;ER_{S}(5) = \frac{13}{16}, \;\;\ldots$$
+
+\newpage
 \subsection{Exercise 9-4}
-(a) We know a always bids its valuation, but b sometimes makes a mistake with its bid. When b's actual valuation is 0, half the time it bids 1 mistakenly. Below we outline the possible outcomes of valuations and bids.
+{\bf(a)} We know a always bids its valuation, but b sometimes makes a mistake with its bid. When b's actual valuation is 0, half the time it bids 1 mistakenly. Below we outline the possible outcomes of valuations and bids.
 
 \begin{itemize}
   \item $(v_{a}, v_{b}) = (0, 0)$:
   \begin{itemize}
-    \item $(b_{a}, b_{b}) = (0, 0)$: Bidder a or b wins and pays 0.
-    \item $(b_{a}, b_{b}) = (0, 1)$: {\bf Mistake bid.} Bidder b wins and pays 0.
+    \item {\bf Outcome 1.} $(b_{a}, b_{b}) = (0, 0)$: Bidder a ($50\%$) or b ($50\%$) wins and pays 0.
+    \item {\bf Outcome 2.} $(b_{a}, b_{b}) = (0, 1)$: {\bf Mistake bid.} Bidder b wins and pays 0.
   \end{itemize}
   \item $(v_{a}, v_{b}) = (0, 1)$:
   \begin{itemize}
-    \item $(b_{a}, b_{b}) = (0, 1)$: Bidder b wins and pays 0.
+    \item {\bf Outcome 3.} $(b_{a}, b_{b}) = (0, 1)$: Bidder b wins and pays 0.
   \end{itemize}
   \item $(v_{a}, v_{b}) = (1, 0)$: Bidder 1 wins and pays 0.
   \begin{itemize}
-    \item $(b_{a}, b_{b}) = (1, 0)$: Bidder a wins and pays 0.
-    \item $(b_{a}, b_{b}) = (1, 1)$: {\bf Mistake bid.} Bidder a or b wins and pays 1.
+    \item {\bf Outcome 4.} $(b_{a}, b_{b}) = (1, 0)$: Bidder a wins and pays 0.
+    \item {\bf Outcome 5.} $(b_{a}, b_{b}) = (1, 1)$: {\bf Mistake bid.} Bidder a ($50\%$) or b ($50\%$) wins and pays 1.
   \end{itemize}
   \item $(v_{a}, v_{b}) = (1, 1)$:
   \begin{itemize}
-    \item $(b_{a}, b_{b}) = (1, 1)$: Bidder a or b wins and pays 1.
+    \item {\bf Outcome 6.} $(b_{a}, b_{b}) = (1, 1)$: Bidder a or b wins and pays 1.
   \end{itemize}
 \end{itemize}
 
-In order to determine if a's dominant strategy is still to always bid its true valuation, we will consider those case where a's true valuation is 0, and then those where its true valuation is 1.
+Given a bids 0 (Outcomes 1, 2, and 3), we see there is a $\frac{1}{8}$ probability it wins and pays 0, and a 0 probability it wins and pays 1. To calculate these values note that given a bids 0, outcomes 1 and 2 each have a $\frac{1}{4}$ probability of occurrence, while outcome 3 has a $\frac{1}{2}$ probability of occurrence.
 
-When a's true valuation is 0, we see that when a bids that same value, a only has a $\frac{1}{8}$ chance to win the auction and pay its true valuation of 0. When it instead bids 1, it has a $\frac{1}{4}$ chance to win and pay its true valuation 0, but also has a $\frac{3}{8}$ chance to win and have to pay 1, which is above its valuation of 0. Thus, this is not advisable, and sticking with its true valuation still seems the dominant strategy.
+$$P(a\>wins\>and\>pays\>0\>|\>a\>bids\>0) = \frac{1}{4}(\frac{1}{2}) + \frac{1}{4}(0) + \frac{1}{2}(0) = \frac{1}{8}$$
 
-When a's true valuation is 1, we see that when a bids that same value, a has a $\frac{5}{8}$ chance to win the auction and pay its true valuation of 1 or less. When it instead bids 0, its chances of winning drop to $\frac{1}{8}$. Thus, again we see that sticking with its true valuation remains the dominant strategy.
+$$P(a\>wins\>and\>pays\>1\>|\>a\>bids\>0) = \frac{1}{4}(0) + \frac{1}{4}(0) + \frac{1}{2}(0) = 0$$
 
-(b) If we equally weight the probability of each of the four possible valuations above at $\frac{1}{4}$, and equally the possible bids in each valuation case, we can then show the seller's expected revenue ($ER_{S}$) is $\frac{3}{8}$.
+Given a bids 1 (Outcomes 4, 5, and 6), we see there is a $\frac{1}{4}$ probability it wins and pays 0, and a $\frac{3}{8}$ probability it wins and pays 1. To calculate these values note that given a bids 1, outcomes 4 and 5 each have a $\frac{1}{4}$ probability of occurrence, while outcome 6 has a $\frac{1}{2}$ probability of occurrence.
+
+$$P(a\>wins\>and\>pays\>0\>|\>a\>bids\>1) = \frac{1}{4}(1) + \frac{1}{4}(0) + \frac{1}{2}(0) = \frac{1}{4}$$
+
+$$P(a\>wins\>and\>pays\>1\>|\>a\>bids\>1) = \frac{1}{4}(0) + \frac{1}{4}(\frac{1}{2}) + \frac{1}{2}(\frac{1}{2}) = \frac{3}{8}$$
+
+To determine if remaining true is still the dominant strategy for a given b's mistake bids, for each of the possible true valuations for a, we will  use the probabilities calculated above to analyze whether staying true or lying is better. 
+
+\newpage
+{\bf Case that a's true valuation is 0:}
+
+When a's true valuation is 0, by staying true and bidding 0 we see using the probabilities above it only has a $\frac{1}{8}$ probability of winning and paying its valuation or less, but has 0 probability of winning and having to pay more than its valuation.
+
+If instead it lies and bids 1, we see it has an increased $\frac{1}{4}$ probability of winning and paying its valuation or less, but it also now has a $\frac{3}{8}$ probability of winning and having to pay more than its valuation, which makes this strategy inadvisable.
+
+Thus, it is better to stay true given a's valuation is 0.
+
+{\bf Case that a's true valuation is 1:}
+
+When a's true valuation is 1, by staying true and bidding 1 we see using the probabilities above it has a $\frac{1}{4} + \frac{3}{8} = \frac{5}{8}$ probability of winning and paying its valuation or less.
+
+If instead it lies and bids 0, we see it only has a $\frac{1}{8}$ probability of winning and paying its valuation or less.
+
+Thus, it is better to stay true given a's valuation is 1.
+
+{\bf Conclusion:}
+
+In each possible valuation for a, staying true remains the dominant strategy for a even considering it is aware of the mistake bids made by b.
+
+\vspace{10mm}
+{\bf(b)} If we equally weight the probability of each of the four possible valuations above at $\frac{1}{4}$, and equally the possible bids in each valuation case, we can then show the seller's expected revenue ($ER_{S}$) is $\frac{3}{8}$.
 
 $$ER_{S} = \frac{1}{4}(\frac{1}{2}(0) + \frac{1}{2}(0)) + \frac{1}{4}(0) + \frac{1}{4}(\frac{1}{2}(0) + \frac{1}{2}(1)) + \frac{1}{4}(1) = \frac{1}{8} + \frac{1}{4} =  \frac{3}{8}$$
 
