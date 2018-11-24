@@ -173,8 +173,17 @@ at the same time.
 \caption{RSA Use Case\label{p1}}
 \end{figure}
 
+We use the properties:
+
+1. Private and public keys can invert each other.
+
+If we use private key to encrypt a message, we can use public key to decrypt the message.
+Otherwise, if we use public key to encrypt a message, we can use private key to decrypt the message.
+
+2. If we have public key, we cannot find private key (because of the fact that a one way function)
 
 Solution:
+
 Let's define:
 
 $e_A$: \textit{Alice}'s public key
@@ -188,6 +197,7 @@ $d_B$: \textit{Bob}'s private key
 $E$: encryption function
 
 $D$: decryption function
+
 
 Assume that \textit{Alice} gets \textit{Bob}'s public key $e_A$,
 and \textit{Bob} gets \textit{Alice}'s public key. Nobody shares private key to anyone.
@@ -206,9 +216,6 @@ In this way, \textit{Bob} use \textit{Alice}'s public key $e_A$ to authenticate
 \textit{Alice}. And use his own private $d_B$ to decrypt the message which 
 provide the secrecy at the same time.
 
-This procedure exploit the property that only $E(M, e)$, $D(E(M, e), d)$ is easy. 
-And the other way $E(M, d)$, $D(E(M, d), e)$ are easy.
-
 \subsection{RSA Algorithms}
 
 \subsubsection{Generate Key Pairs}
@@ -224,7 +231,7 @@ And the other way $E(M, d)$, $D(E(M, d), e)$ are easy.
     \State 3. Choose any number $e$ that relatively prime to $\Phi(n)$, which means
     $gcd(e, \Phi(n)) = 1$
     \\
-    \State 4. Find $d$ such that $d\ast e = 1\; mod\; \Phi(n)$
+    \State 4. Find $d$ such that $d\ast e \equiv 1\; mod\; \Phi(n)$ (take $mod$ both side)
     \\
     \State 5. throw away $p$, $q$, $\Phi(n)$
     \\
@@ -232,7 +239,7 @@ And the other way $E(M, d)$, $D(E(M, d), e)$ are easy.
 \end{algorithmic}
     \label{keyPair}
 \end{algorithm}
-This section gives the algorithms is meant to generate key pair which is $(e, d) as algorithm-$\ref{keyPair}.
+This section gives the algorithms is meant to generate key pair which is $(e, d)$ as algorithm-\ref{keyPair}.
 The function to encrypt message $M$ as $C$:
 
 $C = M^e\; mod\; n$
@@ -243,7 +250,7 @@ $M = C^d\; mod\; n$
 
 \subsubsection{Modulo Properties}
 
-\textit{Modulo} operation finds the remainder after division of one number by antoher,
+\textit{Modulo} operation finds the remainder after division of one number by another,
 which represent as $mod$.
 
 \textit{Modulo} operation has properties:
