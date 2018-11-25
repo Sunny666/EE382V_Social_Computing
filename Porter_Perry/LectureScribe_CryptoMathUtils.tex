@@ -1,0 +1,276 @@
+%
+% This is the LaTeX template file for lecture notes for EE 382C/EE 361C.
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi.
+%
+% This template is based on the template for Prof. Sinclair's CS 270.
+
+\documentclass[twoside]{article}
+\usepackage{graphics}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+\newcounter{lecnum}
+\renewcommand{\thepage}{\thelecnum-\arabic{page}}
+\renewcommand{\thesection}{\thelecnum.\arabic{section}}
+\renewcommand{\theequation}{\thelecnum.\arabic{equation}}
+\renewcommand{\thefigure}{\thelecnum.\arabic{figure}}
+\renewcommand{\thetable}{\thelecnum.\arabic{table}}
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{lecnum}{#1}
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf EE 382V: Social Computing
+                        \hfill Fall 2018} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill Lecture #1: #2  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Lecturer: #3 \hfill Scribe: #4} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+   %{\bf Disclaimer}: {\it These notes have not been subjected to the
+   %usual scrutiny reserved for formal publications.  They may be distributed
+   %outside this class only with the permission of the Instructor.}
+   \vspace*{4mm}
+}
+
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+%Use this command for a figure; it puts a figure in wherever you want it.
+%usage: \fig{NUMBER}{SPACE-IN-INCHES}{CAPTION}
+\newcommand{\fig}[3]{
+			\vspace{#2}
+			\begin{center}
+			Figure \thelecnum.#1:~#3
+			\end{center}
+	}
+% Use these for theorems, lemmas, proofs, etc.
+\newtheorem{theorem}{Theorem}[lecnum]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm}}
+
+% **** IF YOU WANT TO DEFINE ADDITIONAL MACROS FOR YOURSELF, PUT THEM HERE:
+\usepackage{multirow}
+\usepackage{qtree}
+\usepackage{caption}
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{2}{November 10}{Vijay Garg}{Porter Perry}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.  
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+\section{Introduction} \label{intro}
+This lecture focuses on the underlining number theory, algorithms, and and mathematical utilities that form the basis for the RSA encryption and decryption system (crypto) for security and authentication.
+
+\section{Fermat's Little Theorem}
+First we explore \textit{Fermat's Little Theorem} (FLT), which was stated in a letter dated in 1640 by the French mathematician Pierre de Fermat. This theorem is highly useful for simplifying the computation of exponents in modular arithmetic.
+
+\begin{theorem}[Fermat's Little Theorem]
+For any prime number $p$, and any integer number $a$ where $0 < a < p-1$, then $a^{(p-1)} \equiv 1$  (mod $p$).
+\end{theorem}
+
+Note: As explained during the lecture, the equivalence relational notation above is commonly used in academic mathematical writings. The modular equivalent relations are the same as applying the modulus operation on both sides of the equivalent equation. The above equivalence relation can be re-written as $a^{(p-1)}$ (mod $p$) = $1$ (mod $p$).
+
+\subsection{FLT Examples}
+
+\textbf{Ex 1}. Let $p = 5$, and $a = 3$. \\
+
+$a^{(p-1)} ($mod $p) = 3^{(5-1)} ($mod $5)$ \\
+\hspace*{22mm} $= 3^{4} ($mod $5)$ \\
+\hspace*{22mm} $= 81 ($mod $5)$ \\
+\hspace*{22mm} $= 1$ \\
+
+\textbf{Ex 2}. Let $p = 7$, and $a = 4$. \\
+
+$a^{(p-1)} ($mod $p) = 4^{(7-1)} ($mod $7)$ \\
+\hspace*{22mm} $= 4^{6} ($mod $7)$ \\
+\hspace*{22mm} $= 4096 ($mod $7)$ \\
+\hspace*{22mm} $= 1$ \\
+
+\section{Euler's Theorem}
+We now explore \textit{Euler's Theorem}, written by the Swiss mathematician Leonhard Euler in 1736. This theorem is a generalization of Fermat's little theorem. 
+
+\begin{theorem}[Euler's Theorem]
+Let $n$ be any number.\\
+Let $a$ be relatively prime to $n$, where $gcd(a, n) = 1$ (the greatest common divisor between them is 1), then\\
+
+$a^{\phi(n)} \equiv  1 ($mod $n)$ \\
+
+where $\phi(n)$ is Euler's totient function.
+\end{theorem}
+
+\begin{definition}[Euler's totient function]
+$\phi(n) = | \{ i_{1 \leq i \leq n} | gcd(i, n) = 1 \}|$ \\
+Euler's totient function is the size of the set of positive integers, up to $n$, that are relatively prime to $n$. Said another way, it is the number of integers $i$ in the range $1 \leq i \leq n$ for which the greatest common divisor gcd($n, i$) is equal to 1.
+\end{definition}
+
+\subsection{Euler's Totient Function Examples}
+
+\textbf{Ex 1}. Let $n = 5$.\\
+$\phi(5) = | \{1, 2, 3, 4\} | = 4$\\
+
+\textbf{Ex 2}. Let $n = 6$.\\
+$\phi(6) = | \{1, 5\} | = 2$\\
+
+\textbf{Ex 3}. Let $n = 7$.\\
+$\phi(7) = | \{1, 2, 3, 4, 5, 6\} | = 6$\\
+
+\textbf{Ex 4}. Let $n = 12$.\\
+$\phi(12) = | \{1, 5, 7, 11\} | = 4$\\
+
+\textbf{Ex 5}. Let $n = 13$.\\
+$\phi(13) = | \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12\} | = 12$\\
+
+\subsection{Euler's Totient Function Properties}
+A couple interesting and useful properties of Euler's totient function that play a key role in the RSA cryptosystem are:
+
+\begin{itemize}
+\item Euler's totient function is a multiplicative, meaning that if two numbers are $m$ and $n$ are relatively prime, then $\phi(mn) = \phi(m)\phi(n).$
+\item If a number $p$ is prime, then $\phi(p) = (p-1).$
+\end{itemize}
+
+\begin{claim}
+Let $p$ and $q$ both be prime numbers, then
+$\phi(pq) = (p - 1)(q - 1)$
+\end{claim}
+
+\subsection{Examples}
+
+\textbf{Ex 1}. Let $p = 2$ and $q = 3$.\\
+$\phi(2 \times 3) = \phi(6) = (2 - 1)(3 -1)$\\
+\hspace*{24mm} $= (1)(2)$ \\
+\hspace*{24mm} $= 2$
+
+This matches the result of $\phi(6)$ of Euler's Totient Function Ex. 2 in the previous section. \\
+
+\textbf{Ex 2}. Let $p = 5$ and $q = 3$.\\
+$\phi(5 \times 3) = \phi(15) = (5 - 1)(3 -1)$\\
+\hspace*{26mm} $= (4)(2)$ \\
+\hspace*{26mm} $= 8$ \\
+\hspace*{26mm} $= |\{1, 2, 4, 7, 8, 11, 13, 14\}| = 8$
+
+\section{Greatest Common Divisor}
+
+
+[From Wikipedia] \\
+\textit{Euclid's algorithm} is an efficient method for computing the greatest common divisor (GCD) of two numbers, the largest number that divides both of them without leaving a remainder. 
+
+The Euclidean algorithm is based on the principle that the greatest common divisor of two numbers does not change if the larger number is replaced by its difference with the smaller number. For example, 21 is the GCD of 252 and 105 (as $252 = 21 \times 12$ and $105 = 21 \times 5$), and the same number 21 is also the GCD of $105$ and $252 − 105 = 147$. Since this replacement reduces the larger of the two numbers, repeating this process gives successively smaller pairs of numbers until the two numbers become equal. When that occurs, they are the GCD of the original two numbers. By reversing the steps, the GCD can be expressed as a sum of the two original numbers each multiplied by a positive or negative integer, e.g., $21 = 5 \times 105 + (−2) \times 252$.
+
+The \textit{extended Euclidean algorithm} is an extension to the Euclidean algorithm, and computes, in addition to the greatest common divisor of integers a and b, also the coefficients of Bézout's identity, which are integers x and y such that 
+
+$ax+by=$gcd($a,b$)
+
+The extended Euclidean algorithm is particularly useful when a and b are coprime. With that provision, $x$ is the modular multiplicative inverse of a modulo $b$, and $y$ is the modular multiplicative inverse of $b$ modulo $a$. Similarly, the polynomial extended Euclidean algorithm allows one to compute the multiplicative inverse in algebraic field extensions and, in particular in finite fields of non prime order. 
+
+\section{Large Prime Numbers}
+
+The generation of prime numbers is foundational to the RSA cryptosystem. It would be nice to have a fast algorithm to do this. This can be accomplished using by an algorithms that checks if a randomly generated number is prime or not.
+
+In 2002, Agrawal, Kayal, and Saxena published the paper titled \texit{"PRIMES is in P"} in which they presented a deterministic algorithm that determines if any given general number is prime or composite. While this algorithm is of huge academic importance, it is not typical used in practice in  favor of other faster options.  
+
+The \textit{Prime Number Theorem} describes limiting distribution of of prime numbers, which become less common as they become larger, and formally quantifies the rate at which they occur. 
+
+\begin{theorem}[Prime Number Theorem]
+Let $n$ be any positive number.\\
+Let $\pi(n)$ be the prime counting function that gives the number of primes less than or equal to $n$.
+The function $n/\ln(n)$ is a good approximation for $\pi(n)$ in that the limit of the ratio of the two functions is equal to one as n increases without bound:
+
+\displaystyle $\lim_{n\to\infty} \frac{\pi(n)}{n/\ln(n)} = 1$ 
+\end{theorem}
+
+This means that for a large value of $n$, the probability that a randomly generated number not greater than $n$ is prime is very close to  $1/\ln(n)$. 
+
+The above probabilistic statement of the prime number theorem is used to determine approximately how many random numbers will need to be generated and tested before a prime number will likely be found. For example, to find a 64-digit random prime number, a total of $\ln 10^{64} \approx 148$ randomly generated numbers will be tested before a prime number is found. The quantity of numbers tested can be reduced by half if only odd random numbers are tested, which for this example would be $(\ln 10^{64})/2 \approx 74$.
+
+\section{Fast Computation of Modulus Exponents}
+
+Consider the example of computing $7^{1024}$ mod $5$. The direct method involves first calculating $7^{1024}$ by multiplying $7$ by itself $1024$ times, then taking the result modulo $5$. A more efficient way to solve the above is to take advantage of the following modular multiplication rule:
+
+$a^2$ mod $n$ = $(a \times a)$ mod $n$ = (($a$ mod $n$) $\times$ ($a$ mod $n$)) mod $n$ \\
+
+We can use the method of repeated squaring to calculate the answer more efficiently: \\
+
+$7$ mod $5$ = 2 \\
+$7^{2}$ mod $5$ = ($2 \times 2$) mod $5$ = $4$ \\
+$7^{4}$ mod $5$ = ($4 \times 4$) mod $5$ = $16$ mod $5$ = 1 \\
+$7^{8}$ mod $5$ = ($1 \times 1$) mod $5$ = $1$ \\
+$7^{16}$ mod $5$ = ($1 \times 1$) mod $5$ = $1$ \\
+\ldots \\
+$7^{512}$ mod $5$ = ($1 \times 1$) mod $5$ = $1$ \\
+$7^{1024}$ mod $5$ = ($1 \times 1$) mod $5$ = $1$ \\
+
+The above example happened to have an exponent that was conveniently a power of 2. What if it was desired to solve $7^{1025}$? Combining the repeated squaring result with the modular multiplication rule, we get the following: \\
+
+$7^{1025}$ mod $5$ = (($7^{1024} \times 7^{1}$) mod $5$ = ($7^{1024}$ mod $5$) $\times$ ($7^{1}$ mod $5$)) mod $5$ =  ($1 \times 2$) mod $5$ = $2$ \\
+
+\subsection{Repeated Squaring and Multiplication Algorithm}
+ The exponential $a^{e}$ (mod $n$) can be solved using the following iterative algorithm:\\
+ 
+ \texttt{Step 1:  Let $e_{k}e_{k-1}\ldots e_{1}e_{0}$ be the binary representation of $e$.} \\
+ \texttt{Step 2: Set the variable $c$ to $1$} \\
+ \texttt{Step 3: Repeat steps 3a and 3b for i=$k,k-1,\ldots,1,0$} \\
+\hspace*{9mm} \texttt{Step 3a: $c := c^2$ mod $n$} \\
+\hspace*{9mm} \texttt{Step 3b: if ($e_{i}) = 1$, then $c := (a * c)$ mod $n$} \\
+
+Alternatively, this can also be implemented as a recursive algorithm:
+
+\texttt{Function exp(a, e, n)} \\
+\hspace*{7mm} \texttt{if (e is 1) return a} \\
+\hspace*{7mm} \texttt{else} \\
+\hspace*{14mm} \texttt{if (e is even)} \\
+\hspace*{21mm} \texttt{return (exp(a, e/2, n)$^2$ mod n)} \\
+\hspace*{14mm} \texttt{else} \\
+\hspace*{21mm} \texttt{return (a * exp(a, e/2, n)$^2$ mod n)} \\
+
+\end{document}
